@@ -1,6 +1,86 @@
 package de.edgelord.saltycards.card;
 
+/**
+ * A class representing a playing card.
+ */
 public class Card {
+
+    /**
+     * The suit of this card.
+     */
+    private Suit suit;
+
+    /**
+     * The rank of this card.
+     */
+    private Rank rank;
+
+    /**
+     * The constructor.
+     *
+     * @param suit the suit of the card
+     * @param rank the rank of the card
+     */
+    public Card(Suit suit, Rank rank) {
+        this.suit = suit;
+        this.rank = rank;
+    }
+
+    /**
+     * The constructor with switched arguments.
+     *
+     * @param rank the rank of the card
+     * @param suit the suit of the card
+     */
+    public Card(Rank rank, Suit suit) {
+        this.suit = suit;
+        this.rank = rank;
+    }
+
+    public String getName(CardNamingRules namingRules) {
+        return namingRules.getName(this);
+    }
+
+    public Suit getSuit() {
+        return suit;
+    }
+
+    public void setSuit(Suit suit) {
+        this.suit = suit;
+    }
+
+    public Rank getRank() {
+        return rank;
+    }
+
+    public void setRank(Rank rank) {
+        this.rank = rank;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Card) {
+            Card object = (Card) obj;
+
+            return (getRank() == object.getRank()) && (getSuit() == object.getSuit());
+        }
+
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "suit=" + suit +
+                ", rank=" + rank +
+                '}';
+    }
+
+    @Override
+    protected Object clone() {
+        return new Card(suit, rank);
+    }
+
     /**
      * The four suits of playing cards,
      * 1. Spades
@@ -91,6 +171,7 @@ public class Card {
 
         /**
          * Returns the numeric value of the given <code>Rank</code>.
+         * The {@link #RANK_ACE} is 14, and only 14.
          *
          * @param rank the rank
          * @return the value of the given <code>Rank</code>.
@@ -127,6 +208,40 @@ public class Card {
             }
 
             return 0;
+        }
+
+        public static Rank getByValue(int value) {
+            switch (value) {
+                case 2 :
+                    return RANK_2;
+                case 3 :
+                    return RANK_3;
+                case 4 :
+                    return RANK_4;
+                case 5 :
+                    return RANK_5;
+                case 6 :
+                    return RANK_6;
+                case 7 :
+                    return RANK_7;
+                case 8 :
+                    return RANK_8;
+                case 9 :
+                    return RANK_9;
+                case 10 :
+                    return RANK_10;
+                case 11 :
+                    return RANK_JACK;
+                case 12 :
+                    return RANK_QUEEN;
+                case 13 :
+                    return RANK_KING;
+                case 14 :
+                    return RANK_ACE;
+
+            }
+
+            throw new IllegalArgumentException("rank value must be between (inclusively) 2 and 14");
         }
 
         /**
