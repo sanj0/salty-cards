@@ -46,6 +46,21 @@ public class CardCollection {
     }
 
     /**
+     * Picks an array of random cards from {@link #cards} and removes them from the list.
+     *
+     * @return the picked cards
+     */
+    public Card[] pickRandom(int number) {
+        Card[] pickedCards = new Card[number];
+
+        for (int i = 0; i < number; i++) {
+            pickedCards[i] = pickRandom();
+        }
+
+        return pickedCards;
+    }
+
+    /**
      * Picks a random card from {@link #cards} and returns it.
      *
      * @return the picked card
