@@ -18,7 +18,7 @@ public class Card {
     /**
      * The constructor.
      *
-     * @param suit the suit of the card
+     * @param suit the suit of the car
      * @param rank the rank of the card
      */
     public Card(Suit suit, Rank rank) {
@@ -108,6 +108,36 @@ public class Card {
          * The Clubs of french playing cards.
          */
         CLUBS;
+
+        public static Suit getByValue(int value) {
+            switch (value) {
+                case 1 :
+                    return SPADES;
+                case 2 :
+                    return HEARTS;
+                case 3 :
+                    return DIAMONDS;
+                case 4:
+                    return CLUBS;
+            }
+
+            throw new IllegalArgumentException("rank value must be between (inclusively) 1 and 4");
+        }
+
+        public static int getValueBySuit(Suit suit) {
+            switch (suit) {
+                case SPADES:
+                    return 1;
+                case HEARTS:
+                    return 2;
+                case DIAMONDS:
+                    return 3;
+                case CLUBS:
+                    return 4;
+            }
+
+            return 0;
+        }
 
         /**
          * Returns the name of the given suit according to {@link SuitNamingRules#DEFAULT_ENGLISH_RULES}.
