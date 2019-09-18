@@ -17,6 +17,10 @@ public class CardCollection {
         this.cards.addAll(Arrays.asList(cards));
     }
 
+    public void print() {
+        cards.forEach(System.out::println);
+    }
+
     public static CardCollection completeSet() {
         CardCollection collection = new CardCollection();
 
