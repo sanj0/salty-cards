@@ -1,6 +1,7 @@
 package de.edgelord.saltycards.collection;
 
 import de.edgelord.saltycards.card.Card;
+import de.edgelord.saltycards.card.CardNamingRules;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -17,8 +18,78 @@ public class CardCollection {
         this.cards.addAll(Arrays.asList(cards));
     }
 
+    public CardCollection getByRank(Card.Rank rank) {
+        CardCollection collection = new CardCollection();
+
+        for (Card card : cards) {
+            if (card.getRank() == rank) {
+                collection.add(card);
+            }
+        }
+
+        return collection;
+    }
+
+    public CardCollection getBySuit(Card.Suit suit) {
+        CardCollection collection = new CardCollection();
+
+        for (Card card : cards) {
+            if (card.getSuit() == suit) {
+                collection.add(card);
+            }
+        }
+
+        return collection;
+    }
+
+    public Card getLowestCard() {
+        Card lowestCard = get(0);
+
+        for (Card card : cards) {
+            if (lowestCard.isHigher(card)) {
+                lowestCard = card;
+            }
+        }
+
+        return lowestCard;
+    }
+
+    public Card getHighestCard() {
+        Card lowestCard = get(0);
+
+        for (Card card : cards) {
+            if (card.isHigher(lowestCard)) {
+                lowestCard = card;
+            }
+        }
+
+        return lowestCard;
+    }
+
+    public void sort() {
+        Collections.sort(cards);
+    }
+
+    /**
+     * Gets {@link #cards}.
+     *
+     * @return the value of {@link #cards}
+     */
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    /**
+     * Sets {@link #cards}.
+     *
+     * @param cards the new value of {@link #cards}
+     */
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+    }
+
     public void print() {
-        cards.forEach(System.out::println);
+        cards.forEach(card -> System.out.println(card.getName(CardNamingRules.DEFAULT_EXTENDED_ENGLISH_RULES)));
     }
 
     public static CardCollection completeSet() {

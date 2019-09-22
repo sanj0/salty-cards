@@ -3,7 +3,7 @@ package de.edgelord.saltycards.card;
 /**
  * A class representing a playing card.
  */
-public class Card {
+public class Card implements Comparable {
 
     /**
      * The suit of this card.
@@ -35,6 +35,14 @@ public class Card {
     public Card(Rank rank, Suit suit) {
         this.suit = suit;
         this.rank = rank;
+    }
+
+    public boolean isHigher(Card other) {
+        return Rank.getRankValue(rank) > Rank.getRankValue(other.rank);
+    }
+
+    public boolean equalRank(Card other) {
+        return Rank.getRankValue(rank) == Rank.getRankValue(other.rank);
     }
 
     public String getName(CardNamingRules namingRules) {
@@ -79,6 +87,12 @@ public class Card {
     @Override
     protected Object clone() {
         return new Card(suit, rank);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Card otherCard = (Card) o;
+        return(Rank.getRankValue(rank) - Rank.getRankValue(otherCard.rank));
     }
 
     /**
