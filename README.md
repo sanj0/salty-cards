@@ -11,3 +11,7 @@ Salty Cards provides several features to work with cards, such as the following:
 
 - Create cards
 - Store cards
+- Shuffle Cards
+- Pick Cards
+- Name Cards
+- ...
